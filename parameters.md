@@ -1,4 +1,6 @@
-# Parameters for a Small, Constrained Backend
+# Parameters for AI-Assisted Development
+
+## General parameters
 
 1. **Explicitness** — Everything visible in the code, no magic
 2. **Thinness** — The framework does little but clearly, easy to build on top of
@@ -8,11 +10,15 @@
 5. **Orthogonal layers** — Each part does one thing
 6. **Buildable, not navigable** — AI builds better than it navigates
 7. **Readability** — How naturally the code expresses intent
-8. **Dynamic over static** — Dynamic languages perform consistently better (with caveats at large scale)
-9. **Small foundation with rich primitives** — The Smalltalk principle: few verbs, but the right verbs
-   - Counter-example: Lua — small cognitive surface and small foundation, but the primitives aren't rich. Tables can do everything but give you nothing for free.
-10. **Declarative** — SQL, HTML, HTMX: describe what, not how. Declarative is about what level of abstraction the code operates at.
-11. **Design readability without enforcement. Scaffolding-friendliness.**
+8. **Declarative** — SQL, HTML, HTMX: describe what, not how. Declarative is about what level of abstraction the code operates at.
+
+## Backend language parameters
+
+1. **Dynamic over static** — Dynamic languages perform consistently better (with caveats at large scale)
+2. **Small foundation with rich primitives** — The Smalltalk principle: few verbs, but the right verbs
+    - Counter-example: Lua — small cognitive surface and small foundation, but the primitives aren't rich. Tables can do everything but give you nothing for free.
+3. **Design readability without enforcement. Scaffolding-friendliness.**
+4. **Imperative paradigm** — When given multi-paradigm languages, AI consistently chooses imperative style with free-standing functions. No OO, minimal functional. The paradigm the AI naturally reaches for appears to be a factor in performance.
 
 ## Dismissed parameter
 
