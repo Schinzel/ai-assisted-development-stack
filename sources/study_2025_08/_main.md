@@ -11,6 +11,7 @@ with different stacks using AI-assisted development.
 - **Architecture**: Vertical slices within multi-module monolith
 - **Build**: Maven, fat JAR via shade plugin
 - **Notable**: Custom annotation-based routing (@Page, @PageBlock, @PageBlockApi). Custom in-house framework layer on top of Javalin.
+- **Observations**: Developed an AI visual development approach using Playwright as feedback mechanism — AI could verify layout, colors, and alignment programmatically. Guide described as "intentionally minimal — as patterns emerge, they will be documented."
 
 ## wms3 — Kotlin + Spring Boot + Next.js SPA
 
@@ -20,6 +21,7 @@ with different stacks using AI-assisted development.
 - **Architecture**: Layered backend + SPA frontend, OpenAPI-generated TypeScript client
 - **Build**: Gradle (backend), Next.js/Webpack (frontend)
 - **Notable**: Full type-safe contract via OpenAPI code generation. Two separate build systems.
+- **Observations**: Stack explicitly chosen as "AI-optimized" — rationale was "maximum training data" (React/Spring Boot have largest AI datasets) and "component-based = natural units for AI code generation." Architecture decision to defer monorepo migration followed YAGNI principle. Despite the AI-optimization rationale, this was the heaviest stack attempted.
 
 ## wms4 — Ruby + Sinatra + SSR
 
@@ -29,6 +31,7 @@ with different stacks using AI-assisted development.
 - **Architecture**: Feature-based vertical slices, repository + DTO pattern
 - **Build**: Bundler, Puma server
 - **Notable**: Minimal dependencies (6 production gems). Dynamic feature loading via config.ru auto-mounting.
+- **Observations**: Dramatic shift toward simplicity after wms3. Pure server-side rendering, no SPA, no build pipeline for frontend. In-memory DB used for rapid prototyping before committing to PostgreSQL.
 
 ## wms5 — Kotlin + Ktor + Thymeleaf SSR
 
@@ -38,6 +41,7 @@ with different stacks using AI-assisted development.
 - **Architecture**: Feature-based vertical slices (routes/service/repo/DTO/template per feature)
 - **Build**: Gradle, Shadow JAR
 - **Notable**: Kotlin coroutines for async DB. Testcontainers for integration tests.
+- **Observations**: Established explicit parameters for AI-assisted development: "AI tractability" — architecture must be simple enough for AI to implement correctly 9/10 times on first attempt, otherwise it's too complex. Also "boring technology" — prefer mature, battle-tested tech with 1000+ Stack Overflow answers. Explored candidate patterns like contract-first development, declarative screens, and pure functions.
 
 ## wms6 — Kotlin + Javalin + HTMX + JTE (skeleton)
 
@@ -46,7 +50,7 @@ with different stacks using AI-assisted development.
 - **Database**: Not yet configured
 - **Architecture**: Not yet implemented
 - **Build**: Gradle
-- **Notable**: Skeleton repo only — declared intent, no implementation.
+- **Notable**: Skeleton repo only — declared intent, no implementation. Marks the pivot point to HTMX.
 
 ## wms7 — Java + Javalin + HTMX + JTE + Raw SQL
 
@@ -56,6 +60,12 @@ with different stacks using AI-assisted development.
 - **Architecture**: Feature-based with file-system routing (folder structure = URL routes)
 - **Build**: Maven, fat JAR via shade plugin
 - **Notable**: Lombok, MapStruct, Vavr. Convention: class names (Get, Post, Put, Delete) determine HTTP method. Folders `pages_auth/` vs `pages_open/` for auth separation.
+- **Observations**:
+  - Switched from Kotlin to Java, and from ORM to raw SQL (JDBI).
+  - HTMX spike documented: replaced Alpine.js interval switching with pure HTMX. Response times were 10-20ms (imperceptible). Template isolation worked well (~80 lines vs 400-line monolith). But the halfway approach failed — "isolated templates but shared handler with conditionals — worst of both worlds."
+  - Key AI insight: "CC struggled: Signal that the task boundaries weren't clean." When Claude Code had trouble, it signaled an architecture problem, not an implementation problem.
+  - Established code standards for AIs: "Since AI might implement functions differently than expected, well-defined interfaces with clear input/output requirements ensure architectural boundaries remain intact."
+  - Preference for quiet logs: "I am afraid that will lead to log bloat" — important messages get lost in noise.
 
 ## workflow-management — Kotlin + Javalin + SvelteKit SPA
 
@@ -65,12 +75,4 @@ with different stacks using AI-assisted development.
 - **Architecture**: Modular monolith with vertical slices. 12 Gradle modules (logic + sites layers).
 - **Build**: Gradle, fat JAR. Frontend pre-built as static files embedded in JAR.
 - **Notable**: Custom Gradle task auto-generates TypeScript types from Kotlin DTOs. SvelteKit adapter-static for pre-rendering.
-
-## poak — Java + Javalin + HTMX + JTE + Raw SQL
-
-- **Backend**: Java 21, Javalin 6.7
-- **Frontend**: SSR with JTE, HTMX, Alpine.js, Tailwind CSS (standalone CLI, no Node.js)
-- **Database**: PostgreSQL, JDBI (raw SQL), Flyway migrations
-- **Architecture**: Feature-based with file-system routing (same pattern as wms7, more mature)
-- **Build**: Maven, fat JAR via shade plugin
-- **Notable**: Vavr for functional patterns. Resend for email, AWS S3/R2 for files. Playwright + Testcontainers for testing. Constructor-as-action transaction pattern. Most mature of all repos.
+- **Observations**: Extensive framework evaluation process documented. Started by asking 3 AI pairs (Claude Code + Gemini) independently — got 3 different answers (React, SvelteKit, Flutter). After cross-pollination they converged on Vue.js 3. Next day, deeper analysis revealed Vue.js lacked a native workflow designer (would need React Flow wrapper — a "frankenstack"). Final consensus: SvelteKit + Svelte Flow + Kotlin backend. Non-starters documented: Vaadin ("terrible UI and very sluggish"), Compose Multiplatform (alpha, broken JS interop). Strong preference: "Perfectly not React."
