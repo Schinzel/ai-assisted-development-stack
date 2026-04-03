@@ -3,6 +3,32 @@
 Anecdotal experiences from building the same type of application (workflow/warehouse management)
 with different stacks using AI-assisted development.
 
+
+## Summary
+AIs used:
+- ChatGPT
+- Gemini
+- Claude Desktop
+
+This is my observations from 2025. Gen AI models develop at a very high pace. 
+What was true then might not be true a year later, but I suspect that same parameters will be true for at least a couple of years.
+
+- What stood out: What AI thought was an efficient stack for AI assisted development is not correct.
+  - AIs very strongly focused on what stack, technology or language has the most training data. 
+  - AIs severally overestimates its capacity to handle more complicated build steps
+  - AIs underestimates how well it handles more complicated set ups
+
+My conclusions
+- Complicated stacks, languages, techniques slow things down
+- You need a certain threshold level of training data. After that, other aspects are much more
+  important than more training data.
+
+Surprises
+- The stack that the AI got to decide on performed horribly. 
+- That the Ruby stack by far was the most productive. 
+  - I chose Ruby because it is described as an elegant language and being inspired by Smalltalk, a language that I admire.
+  - I did not think it would perform well due to the limited 
+
 ## wms2 — Kotlin + Javalin + Custom SSR + Exposed ORM
 
 - **Backend**: Kotlin, Javalin (via custom "WebBlocks" wrapper)
