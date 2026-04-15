@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<title>AI-Assisted Development Workflow</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f5f0; padding: 30px; }
+  .canvas { position: relative; width: 1440px; height: 800px; margin: 0 auto; }
+
+  .circle {
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    text-align: center; font-size: 11px; position: absolute;
+  }
+  .diamond-wrap {
+    position: absolute; width: 80px; height: 80px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .diamond-inner {
+    width: 58px; height: 58px; transform: rotate(45deg);
+    background: #f0d040; border: 2px solid #c0a020;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .diamond-inner span { transform: rotate(-45deg); font-size: 10px; text-align: center; line-height: 1.2; }
+  .box {
+    position: absolute; border-radius: 8px; display: flex; align-items: center;
+    justify-content: center; text-align: center; font-size: 11px; padding: 6px 10px; line-height: 1.3;
+  }
+  .agent { background: #a0c8f0; border: 2px solid #6090c0; color: #1a3a5c; }
+  .human { background: #d0b8e8; border: 2px solid #a080c0; color: #3a1a5c; }
+  .doc { background: #c8d8f0; border: 2px solid #88a0cc; color: #1a3a5c; }
+  .code-box { background: #d0d0d0; border: 2px solid #999; color: #333; }
+  .ticket { background: #f4b4b4; border: 2px solid #c66; width: 70px; height: 70px; }
+
+  .panel { position: absolute; border-radius: 12px; border: 2px solid; }
+  .panel-title {
+    position: absolute; top: 10px; left: 0; right: 0; text-align: center;
+    font-size: 15px; font-weight: 600; color: #555;
+  }
+  .planning-panel { background: rgba(255,245,200,0.7); border-color: #d4c878; }
+  .workflow-panel { background: rgba(210,240,210,0.7); border-color: #88b888; }
+
+  .sub-section {
+    position: absolute; border: 1.5px dashed #aaa; border-radius: 8px;
+    background: rgba(255,255,255,0.2);
+  }
+  .label {
+    position: absolute; font-size: 9px; color: #666; text-align: center; line-height: 1.3;
+  }
+  .note {
+    position: absolute; font-size: 9px; color: #777; line-height: 1.5;
+    background: rgba(255,255,240,0.9); border: 1px solid #ddd;
+    border-radius: 6px; padding: 8px 10px;
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <!-- ═══════════ SVG Arrows ═══════════ -->
+  <svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;" viewBox="0 0 1440 800">
+    <defs>
+      <marker id="ah-blue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0, 8 3, 0 6" fill="#4466aa"/>
+      </marker>
+      <marker id="ah-red" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0, 8 3, 0 6" fill="#cc3333"/>
+      </marker>
+      <marker id="ah-gray" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0, 8 3, 0 6" fill="#999"/>
+      </marker>
+      <marker id="ah-dark" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <polygon points="0 0, 8 3, 0 6" fill="#555"/>
+      </marker>
+    </defs>
+
+    <!-- Jira → Breakdown -->
+    <line x1="90" y1="395" x2="118" y2="395" stroke="#555" stroke-width="1.5" marker-end="url(#ah-dark)"/>
+
+    <!-- Breakdown → diamonds -->
+    <polyline points="218,375 248,310 268,278" fill="none" stroke="#999" stroke-width="1.3" stroke-dasharray="5,4" marker-end="url(#ah-gray)"/>
+    <line x1="218" y1="395" x2="260" y2="395" fill="none" stroke="#999" stroke-width="1.3" stroke-dasharray="5,4" marker-end="url(#ah-gray)"/>
+    <polyline points="218,415 248,480 268,512" fill="none" stroke="#999" stroke-width="1.3" stroke-dasharray="5,4" marker-end="url(#ah-gray)"/>
+
+    <!-- Uppgift ... → Planning -->
+    <line x1="340" y1="395" x2="368" y2="395" stroke="#555" stroke-width="1.5" marker-end="url(#ah-dark)"/>
+
+    <!-- Human plan → Planner -->
+    <line x1="460" y1="505" x2="460" y2="468" fill="none" stroke="#4466aa" stroke-width="1.5" marker-end="url(#ah-blue)"/>
+
+    <!-- Planner → Dokument Uppgift -->
+    <path d="M460,415 C440,320 490,260 530,230" fill="none" stroke="#4466aa" stroke-width="1.5" marker-end="url(#ah-blue)"/>
+
+    <!-- Planner → Scaffolder 1 -->
+    <line x1="505" y1="440" x2="540" y2="440" fill="none" stroke="#4466aa" stroke-width="1.5" marker-end="url(#ah-blue)"/>
+
+    <!-- Scaffolder 1 → Scaffolder 2 -->
+    <line x1="628" y1="440" x2="658" y2="440" fill="none" stroke="#4466aa" stroke-width="1.5" marker-end="url(#ah-blue)"/>
+
+    <!-- Human disc → Scaffolder 2 -->
+    <line x1="690" y1="505" x2="690" y2="468" fill="none" stroke="#4466aa" stroke-width="1.5" marker-end="url(#ah-blue)"/>
+
+    <!-- Scaffoldad kod → Kod -->
+    <polyline points="500,640 500,680 930,735" fill="none" stroke="#cc3333" stroke-width="1.5" marker-end="url(#ah-red)"/>
+
+    <!-- Justering → Kod -->
+    <polyline points="660,640 660,690 940,735" fill="none" stroke="#cc3333" stroke-width="1.5" marker-end="url(#ah-red)"/>
+
+    <!-- Dokument Uppgift → Orchestrator -->
+    <polyline points="590,210 760,210 870,300" fill="none" stroke="#4466aa" stroke-width="1.5" marker-end="url(#ah-blue)"/>
+
+    <!-- Output-fil Mall → Output-fil -->
+    <line x1="900" y1="175" x2="950" y2="198" fill="none" stroke="#555" stroke-width="1.5" marker-end="url(#ah-dark)"/>
+
+    <!-- Output-fil → Orchestrator -->
+    <line x1="975" y1="245" x2="920" y2="300" fill="none" stroke="#4466aa" stroke-width="1.5" marker-end="url(#ah-blue)"/>
+
+    <!-- Orchestrator ↔ Output-fil (info) -->
+    <path d="M930,310 Q1030,270 1005,245" fill="none" stroke="#999" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#ah-gray)"/>
+
+    <!-- Orchestrator → agents -->
+    <line x1="860" y1="355" x2="840" y2="430" fill="none" stroke="#555" stroke-width="1.5" marker-end="url(#ah-dark)"/>
+    <line x1="895" y1="355" x2="920" y2="430" fill="none" stroke="#555" stroke-width="1.5" marker-end="url(#ah-dark)"/>
+    <line x1="925" y1="355" x2="1010" y2="430" fill="none" stroke="#555" stroke-width="1.5" marker-end="url(#ah-dark)"/>
+
+    <!-- Agents → Kod -->
+    <line x1="835" y1="480" x2="930" y2="720" fill="none" stroke="#cc3333" stroke-width="1.5" marker-end="url(#ah-red)"/>
+    <line x1="920" y1="480" x2="950" y2="720" fill="none" stroke="#cc3333" stroke-width="1.5" marker-end="url(#ah-red)"/>
+    <line x1="1020" y1="480" x2="975" y2="720" fill="none" stroke="#cc3333" stroke-width="1.5" marker-end="url(#ah-red)"/>
+
+    <!-- External Human → Ext Orchestrator -->
+    <line x1="1300" y1="450" x2="1300" y2="390" fill="none" stroke="#4466aa" stroke-width="1.5" marker-end="url(#ah-blue)"/>
+
+    <!-- Ext Orchestrator → Kod -->
+    <polyline points="1250,375 1170,690 985,740" fill="none" stroke="#cc3333" stroke-width="1.5" marker-end="url(#ah-red)"/>
+  </svg>
+
+  <!-- ═══════════ Jira Ticket ═══════════ -->
+  <div class="circle ticket" style="left:20px; top:360px;">Jira<br>Ticket</div>
+
+  <!-- ═══════════ Breakdown ═══════════ -->
+  <div class="box" style="left:120px; top:363px; width:98px; height:65px; background:#fff; border:1.5px solid #888; font-size:9px; border-radius:4px;">
+    Bryt ner i lagom<br>storlek, av User<br>stories, Justeringar,<br>Produktbuggar eller<br>Utvecklare
+  </div>
+
+  <!-- ═══════════ Diamonds ═══════════ -->
+  <div class="diamond-wrap" style="left:260px; top:238px;">
+    <div class="diamond-inner"><span>Uppgift 1</span></div>
+  </div>
+  <div class="diamond-wrap" style="left:260px; top:355px;">
+    <div class="diamond-inner"><span>Uppgift<br>...</span></div>
+  </div>
+  <div class="diamond-wrap" style="left:260px; top:472px;">
+    <div class="diamond-inner"><span>Uppgift<br>N</span></div>
+  </div>
+
+  <!-- ═══════════ Planning Panel (no children with abs positioning) ═══════════ -->
+  <div class="panel planning-panel" style="left:370px; top:130px; width:380px; height:520px;">
+    <div class="panel-title">Planering (Utvecklare + AI)</div>
+  </div>
+
+  <!-- Planning contents (positioned relative to canvas) -->
+  <!-- Dokument Uppgift -->
+  <div class="box doc" style="left:510px; top:185px; width:110px; height:50px;">Dokument<br>Uppgift 📄</div>
+
+  <!-- Scaffolding title -->
+  <div class="label" style="left:460px; top:380px; width:180px; font-size:13px; font-weight:600; color:#555;">Scaffolding av uppgift</div>
+
+  <!-- Scaffolding dashed area -->
+  <div class="sub-section" style="left:395px; top:400px; width:330px; height:70px;"></div>
+
+  <!-- Planner -->
+  <div class="box agent" style="left:410px; top:413px; width:90px; height:48px;">Planner 🤖</div>
+  <!-- Scaffolder 1 -->
+  <div class="box agent" style="left:540px; top:413px; width:90px; height:48px;">Scaffolder 🤖</div>
+  <!-- Scaffolder 2 -->
+  <div class="box agent" style="left:660px; top:413px; width:80px; height:48px;">Scaffolder 🤖</div>
+
+  <!-- Human Plan -->
+  <div class="box human" style="left:418px; top:510px; width:80px; height:38px;">Human 👤</div>
+  <!-- Human Discuss -->
+  <div class="box human" style="left:653px; top:510px; width:80px; height:38px;">Human 👤</div>
+
+  <!-- Sub-labels -->
+  <div class="label" style="left:395px; top:565px; width:140px; font-size:12px; font-weight:600; color:#555;">Planering av uppgift</div>
+  <div class="label" style="left:620px; top:560px; width:120px; font-size:12px; font-weight:600; color:#555;">Diskutera<br>scaffoldingen</div>
+
+  <!-- Planning edge labels -->
+  <div class="label" style="left:410px; top:300px; width:60px;">Uppdatera<br>dokument</div>
+  <div class="label" style="left:520px; top:365px; width:60px;">Lista av<br>scaffoldande filer</div>
+  <div class="label" style="left:455px; top:655px; width:60px;">Scaffoldad<br>kod</div>
+  <div class="label" style="left:615px; top:655px; width:75px;">Justering<br>scaffoldad kod</div>
+
+  <!-- ═══════════ Workflow Panel (empty shell) ═══════════ -->
+  <div class="panel workflow-panel" style="left:775px; top:100px; width:390px; height:670px;">
+    <div class="panel-title">Workflow (AI)</div>
+  </div>
+
+  <!-- Workflow contents (canvas-relative) -->
+  <!-- Output-fil Mall -->
+  <div class="box doc" style="left:825px; top:145px; width:100px; height:48px;">Output-fil<br>Mall 📄</div>
+  <!-- Output-fil -->
+  <div class="box doc" style="left:950px; top:195px; width:100px; height:48px;">Output-fil 📄</div>
+  <!-- Kopia label -->
+  <div class="label" style="left:912px; top:170px; width:35px;">Kopia</div>
+
+  <!-- Info exchange label -->
+  <div class="label" style="left:1000px; top:258px; width:130px; font-size:8px;">
+    Skriva information till andra agenter.<br>Läs info från andra agenter
+  </div>
+  <!-- Input label -->
+  <div class="label" style="left:830px; top:278px; width:35px;">Input</div>
+
+  <!-- Inner workflow dashed area -->
+  <div class="sub-section" style="left:790px; top:285px; width:360px; height:460px;"></div>
+
+  <!-- Orchestrator -->
+  <div class="box agent" style="left:840px; top:305px; width:140px; height:48px;">Orchestrator<br>Command eller agent 🤖</div>
+
+  <!-- Startar label -->
+  <div class="label" style="left:880px; top:395px; width:40px;">Startar</div>
+
+  <!-- Implementor -->
+  <div class="box agent" style="left:800px; top:435px; width:100px; height:42px;">Implementor 🤖</div>
+  <!-- Tester -->
+  <div class="box agent" style="left:915px; top:435px; width:80px; height:42px;">Tester 🤖</div>
+  <!-- Reviewer -->
+  <div class="box agent" style="left:1010px; top:435px; width:90px; height:42px;">Reviewer 🤖</div>
+
+  <!-- Skriver kod label -->
+  <div class="label" style="left:920px; top:520px; width:50px; color:#cc3333;">Skriver<br>kod ↓</div>
+
+  <!-- Kod -->
+  <div class="box code-box" style="left:910px; top:720px; width:100px; height:45px;">Kod 📁</div>
+
+  <!-- ═══════════ External Orchestrator + Human ═══════════ -->
+  <div class="box agent" style="left:1230px; top:340px; width:130px; height:48px;">Orchestrator<br>Command eller agent 🤖</div>
+  <div class="box human" style="left:1255px; top:455px; width:90px; height:38px;">Human 👤</div>
+  <div class="label" style="left:1275px; top:318px; width:50px;">Code<br>Review</div>
+
+  <!-- ═══════════ Future note ═══════════ -->
+  <div class="note" style="left:1115px; top:500px; width:125px;">
+    Senare sa kan man<br>utöka flödet agenter<br>som:<br>
+    &bull; Fixer<br>
+    &bull; Security reviewer<br>
+    &bull; Analyzer<br>
+    &bull; Optimizer
+  </div>
+
+</div>
+</body>
+</html>
