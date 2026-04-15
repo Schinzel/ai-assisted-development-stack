@@ -53,3 +53,4 @@ Why scaffolding
 A strong case can be made for that the more important code review by another human is the scaffolded file. 
 - It is in the system design the expensive mistakes are made
 - The volume of code in the code reviews can turn it into a linting exercise, more than an audit of system design
+
