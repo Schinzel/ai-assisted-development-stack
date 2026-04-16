@@ -54,3 +54,13 @@ A strong case can be made for that the more important code review by another hum
 - It is in the system design the expensive mistakes are made
 - The volume of code in the code reviews can turn it into a linting exercise, more than an audit of system design
 
+## Constant state of change
+The bottleneck is no longer coding, but our ability to evolve our processes.
+A development organization should be in a constant state of continuous small improvements.
+One can always be better, and we should in the sprit of kaizen strive continuous improvements
+Also, circumstance change: teams change, the product changes, the demands change.
+One should acknowledge this and adapt to these changing circumstance.
+This above always important, but is much more important in this age of AI assisted development. 
+This as the ground under our feet change at a dramatic pace. 
+What is true yesterday is not true today and what is true today in not true tomorrow. 
+An organization that embraces this will handle this age AI assisted development much better than those that do not. 
