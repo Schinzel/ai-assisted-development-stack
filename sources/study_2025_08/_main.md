@@ -27,7 +27,7 @@ Surprises
 - The stack that the AI got to decide on performed horribly. 
 - That the Ruby stack by far was the most productive. 
   - I chose Ruby because it is described as an elegant language and being inspired by Smalltalk, a language that I admire.
-  - I did not think it would perform well due to the limited 
+  - I did not think it would perform well due to the limited amount of training data compared to Java, Kotlin and TypeScript.
 
 ## wms2 — Kotlin + Javalin + Custom SSR + Exposed ORM
 
@@ -58,6 +58,8 @@ Surprises
 - **Build**: Bundler, Puma server
 - **Notable**: Minimal dependencies (6 production gems). Dynamic feature loading via config.ru auto-mounting.
 - **Observations**: Dramatic shift toward simplicity after wms3. Pure server-side rendering, no SPA, no build pipeline for frontend. In-memory DB used for rapid prototyping before committing to PostgreSQL.
+- **Experience**: Astonishingly fast and error-free. Without doubt the fastest stack of all I tried, including the winning one. I chose Ruby mostly out of curiosity about the language, not because I expected it to perform well.
+- **Why not chosen**: I don't know Ruby. I was afraid to let an LLM implement solutions and make choices that I could not verify or debate.
 
 ## wms5 — Kotlin + Ktor + Thymeleaf SSR
 
@@ -102,3 +104,11 @@ Surprises
 - **Build**: Gradle, fat JAR. Frontend pre-built as static files embedded in JAR.
 - **Notable**: Custom Gradle task auto-generates TypeScript types from Kotlin DTOs. SvelteKit adapter-static for pre-rendering.
 - **Observations**: Extensive framework evaluation process documented. Started by asking 3 AI pairs (Claude Code + Gemini) independently — got 3 different answers (React, SvelteKit, Flutter). After cross-pollination they converged on Vue.js 3. Next day, deeper analysis revealed Vue.js lacked a native workflow designer (would need React Flow wrapper — a "frankenstack"). Final consensus: SvelteKit + Svelte Flow + Kotlin backend. Non-starters documented: Vaadin ("terrible UI and very sluggish"), Compose Multiplatform (alpha, broken JS interop). Strong preference: "Perfectly not React."
+- **Experience**: This was the stack Claude recommended, based on my programming skills and on what makes development effective for an LLM. It performed terribly and is what started this investigation. Two long, frustrating days of configuration trouble. Extremely slow. The AI kept saying "Oh, just one more small thing, then everything works" for two days.
+- **From the commit history**:
+  - July 1–13: requirements, concepts, DB design and code standards (docs only). Not stack work.
+  - July 14–15: the two days of stack setup, as 10 setup tasks (multi-module, Kotlin, SvelteKit, ktlint, file-based routing, TS type generation, Heroku, testing).
+  - Day 1: Ktor removed mid-setup (switched to Javalin), then "Fix gradle issues".
+  - Day 2: Heroku deploy. 10 commits in one hour of trial and error: JAR filename in Procfile, Gradle buildpack, hardcoded Java home, Node.js buildpack, and finally disabling the frontend build.
+  - Compiled SvelteKit output (`static/_app/immutable/...`) was committed to the repo and changed in every commit. It was cleaned up on July 16.
+  - Root cause: two build chains (Gradle/Kotlin and Node/Vite) plus type generation between them, which had to work together both locally and on Heroku.
