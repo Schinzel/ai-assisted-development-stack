@@ -1,2 +1,0 @@
-- Add my own experiences when I tried the different stacks
-- Utforska mina läsbarheten i språk som parameter
