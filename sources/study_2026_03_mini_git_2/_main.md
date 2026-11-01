@@ -9,3 +9,26 @@ Rust (rust/cargo, a primary workflow) was run only once, versus 3 trials for the
 but v2 produced an incomplete binary (4 LOC, 0 tests run), so the author excluded it from the summary table as a partial failure.
 One failed trial says little about Rust; in the original study Rust passed 38/40 runs across 20 trials.
 
+## Results
+
+Canonical track, average agent time over 3 trials (Python/uv: 1 trial). Rust/Cargo is excluded, see above.
+
+| Language / toolchain | Time (s) |
+|----------------------|----------|
+| Go / go              | 158      |
+| JavaScript / Node    | 170      |
+| Python / uv          | 174      |
+| Python / pip         | 176      |
+| Ruby / Bundler       | 218      |
+| Elixir / Mix         | 227      |
+| Kotlin / Gradle      | 234      |
+| F# / dotnet          | 258      |
+| Java / Maven         | 273      |
+| C# / dotnet          | 277      |
+| VB.NET / dotnet      | 295      |
+| Scala 3 / sbt        | 321      |
+| Java / Gradle        | 342      |
+| Scala 2.13 / sbt     | 379      |
+| PHP / Composer       | 383      |
+| Clojure / Lein       | 393      |
+
