@@ -1,4 +1,4 @@
-# Parameters for AI-Assisted Development
+# Parameters for a language for AI-Assisted Development
 
 ## General parameters
 
@@ -16,12 +16,10 @@
 
 1. **Dynamic over static** — Dynamic languages perform consistently better (with caveats at large scale)
 2. **Small foundation with rich primitives** — The Smalltalk principle: few verbs, but the right verbs
-    - Counter-example: Lua — small cognitive surface and small foundation, but the primitives aren't rich. Tables can do everything but give you nothing for free.
+   - Counter-example: Lua — small cognitive surface and small foundation, but the primitives aren't rich. Tables can do everything but give you nothing for free.
 3. **Design readability without enforcement. Scaffolding-friendliness.**
 4. **Imperative paradigm** — When given multi-paradigm languages, AI consistently chooses imperative style with free-standing functions. No OO, minimal functional. The paradigm the AI naturally reaches for appears to be a factor in performance.
 
 ## Dismissed parameter
 
-**Amount of training data** — secondary effect, not a primary driver.
-
-The JavaScript outlier is interesting — it suggests there is a dataset effect, but that it's secondary. Perhaps we shouldn't dismiss it entirely, but rather downgrade it to a weaker parameter.
+**Amount of training data** - One need to come over a threshold for the amount of training data. Then the amount of training data does not seem to matter. Ruby is a good example of this which is bound to have less training data than Java, but LLMs are much faster with Ruby.

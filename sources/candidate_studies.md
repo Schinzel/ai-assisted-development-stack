@@ -1,15 +1,14 @@
 # Källkandidater: språk och stack för AI-assisterad utveckling
 
-Sammanställt 2026-09-29. Listan innehåller möjliga källor att granska senare. Resultaten är inte tolkade. Utgångspunkten, mame/ai-coding-lang-bench (mars 2026), finns redan i `study_2026_03` och är inte med i listan.
-Verifieringsstatus: **hämtad** = sidan lästes, **sökträff** = URL:en kom från sökresultat eller abstrakt och sidan lästes inte, **overifierat** = sidan gick inte att nå.
+Sammanställt 2026-09-29, kompletterat 2026-11-01. Listan innehåller möjliga källor att granska senare. Resultaten är inte tolkade. Utgångspunkten, mame/ai-coding-lang-bench (mars 2026), finns redan i `study_2026_03` och är inte med i listan.
+Verifieringsstatus: **hämtad** = sidan lästes, **sökträff** = URL:en kom från sökresultat eller abstrakt och sidan lästes inte, **overifierat** = sidan gick inte att nå. **ej kontrollerad** = posten kommer från en separat sammanställning och sidan har inte kontrollerats i samband med att den lades till.
 
 ## 1. Språkjämförelser
 
 ### Hög relevans
-- **kmizu/another-ai-coding-lang-bench** ([GitHub](https://github.com/kmizu/another-ai-coding-lang-bench)). Mars 2026. Benchmark, en fork av mame/ai-coding-lang-bench. Har ett greenfield-spår och ett "canonical"-spår med respektive språks standardverktyg, 16 workflows och 3 försök per workflow. Status: sökträff.
-- **How does programming language affect token efficiency and correctness?** (Dan Luu) ([danluu.com](https://danluu.com/pl-tokens/)). Datum ej verifierat, troligen 2026. Blogg/experiment. Kritiserar mame-benchmarkens metod. Kör en zstd-dekoder och en Pandoc-ändring i ca 14 språk och mäter tokens, korrekthet och tid. Status: sökträff.
 - **The Best Programming Language for Tokenmaxxing** (Wu, Anderson, Guha) ([arXiv 2607.22807](https://arxiv.org/abs/2607.22807)). 2026-07-24. Paper. Jämför Python, Java, Rust och OCaml med 5 modeller. Mäter tokenförbrukning, hur ofta mellanlösningar kompilerar och agenternas trajektorier. Status: sökträff.
 - **Do programming languages still matter to your AI coding agent teammate? Evidence at scale from chess engines** ([arXiv 2606.13763](https://arxiv.org/abs/2606.13763)). 2026-06-11. Paper. Claude Code och Codex byggde schackmotorer i 17 språk. Mäter om koden fungerar, spelstyrka, kostnad och valda features. Status: sökträff.
+- **Turns, Not Lines: Token Cost of LLM Code Generation Across Seven Languages** (Sezgin) ([Zenodo](https://doi.org/10.5281/zenodo.21980217)). Augusti 2026. Rapport. En Go-modul på 2 743 rader porteras till 6 andra språk av Haiku 4.5 och Sonnet 5. Mäter tokens, turer och om porten klarar ett förbestämt beteendetest. Status: ej kontrollerad. Tillagd 2026-11-01.
 
 ### Medel relevans
 - **ubershmekel/language-ai-bench** ([GitHub](https://github.com/ubershmekel/language-ai-bench)). Datum ej verifierat (v1.0). Benchmark. JS, TS strict, Python, Python+mypy strict och Go på 3 uppgiftsfamiljer, 119 rollouts. Mäter pass rate, antal steg, kostnad och om typfeedback ledde till fixar. Status: sökträff.
@@ -18,12 +17,15 @@ Verifieringsstatus: **hämtad** = sidan lästes, **sökträff** = URL:en kom fr�
 - **ABC-Bench: Agentic Backend Coding in Real-World Development** ([arXiv 2601.11077](https://arxiv.org/abs/2601.11077)). Januari 2026. Paper. Benchmark för agentisk backendkodning. Innehållet per språk eller stack är inte kontrollerat. Status: sökträff.
 - **DeepSWE** ([Morph](https://www.morphllm.com/best-ai-coding-agents-2026)). 2026. Benchmark. 113 långa uppgifter i TS, Go, Python, JS och Rust. Uppgifterna kommer från en sekundärkälla. Status: sökträff.
 - **Evaluating and Improving Automated Repository-Level Rust Issue Resolution with LLM-based Agents** ([arXiv 2602.22764](https://arxiv.org/html/2602.22764v1)). Februari 2026. Paper. Agenter löser issues i Rust-repon. Status: sökträff.
+- **Cross-Model Cross-Language AI Coding Agent Performance** (Edelman m.fl.) ([arXiv 2607.26083](https://arxiv.org/abs/2607.26083)). Juli 2026. Paper. Parallella algoritmer i C++, Python och Julia. Status: ej kontrollerad. Tillagd 2026-11-01.
 
 ### Låg relevans
 - **Aider Polyglot** (nämns i [KDnuggets](https://www.kdnuggets.com/top-10-open-source-benchmarks-for-ai-coding-agents-in-2026)). 2024–2025. Benchmark. 225 Exercism-övningar i C++, Go, Java, JS, Python och Rust som mäter modellernas redigeringsförmåga. Status: sökträff (aider.chat är inte kontrollerad).
 - **Frontier Coding Agents Use Metaprogramming to Adapt to Unfamiliar Programming Languages** ([arXiv 2606.10933](https://arxiv.org/abs/2606.10933)). 2026-06-09. Paper. 6 agenter i Brainfuck och Befunge-98. Undersöker hur agenterna hanterar okända språk. Status: sökträff.
 - **Which Programming Language Should You Use with Claude Code?** ([huizhou92, Medium](https://medium.huizhou92.com/which-programming-language-should-you-use-with-claude-code-39beaa4693af) och [Devrim, Stackademic](https://blog.stackademic.com/which-programming-language-should-you-use-with-claude-code-b0b7c4598969)). 2026. Bloggar som troligen kommenterar mame-benchmarken. Status: overifierat (403).
 - **ClaudeLog FAQ: What programming languages work best with Claude Code** ([ClaudeLog](https://claudelog.com/faqs/what-programming-languages-work-best-with-claude-code/)). Datum okänt. Blogg, åsiktstext utan mätning. Status: sökträff.
+- **LangChoiceBench** ([arXiv 2608.06041](https://arxiv.org/abs/2608.06041)). Augusti 2026. Paper från King's College London. Undersöker vilket språk modeller väljer. Status: ej kontrollerad. Tillagd 2026-11-01.
+- **A Study of LLMs' Preferences for Libraries and Programming Languages** ([ACL Anthology](https://aclanthology.org/2026.findings-acl.15.pdf)). ACL Findings 2026. Paper. Undersöker vilka språk och bibliotek modeller föredrar. Status: ej kontrollerad. Tillagd 2026-11-01.
 
 ## 2. Ramverk och stacklager
 
@@ -33,6 +35,7 @@ Verifieringsstatus: **hämtad** = sidan lästes, **sökträff** = URL:en kom fr�
 - **Vibe Coding Economically: Which Framework Is the Cheapest? (Rails vs Django vs Laravel)** ([AppSignal](https://blog.appsignal.com/2026/06/17/vibe-coding-economically-which-framework-is-the-cheapest-rails-vs-django-vs-laravel.html)). 2026-06-17. Blogg med experiment. Cursor Pro bygger samma app i tre ramverk, en körning per ramverk. Mäter tokens, tid, iterationer och N+1-frågor. Status: hämtad.
 - **Architecture as Capability Equalizer for Coding Agents** ([arXiv 2608.21747](https://arxiv.org/abs/2608.21747)). Augusti 2026. Paper. 5 specformat (prosa, Mermaid+ADR, OpenAPI, C4, TS-kontrakt) × 6 modeller, 90 agentkörningar. Mäter bl.a. API-täckning. Status: sökträff.
 - **From LLMs to Agents in Programming: The Impact of Providing an LLM with a Compiler** ([arXiv 2601.12146](https://arxiv.org/pdf/2601.12146)). Januari 2026. Paper. Mäter hur kompilatorfeedback påverkar LLM- och agentprestanda. Status: sökträff.
+- **Type-Error Ablation and AI Coding Agents** (Krishnamurthi, Flatt) ([arXiv 2606.01522](https://arxiv.org/abs/2606.01522)). Juni 2026. Paper. Kontrollerat experiment i ett statiskt typat ML-liknande språk. Jämför typfel, testfel och felmeddelandenas utförlighet som stöd för agentens reparationer. Status: ej kontrollerad. Tillagd 2026-11-01.
 
 ### Medel relevans
 - **Type-Constrained Code Generation with Language Models** ([arXiv 2504.09246](https://arxiv.org/pdf/2504.09246)). PLDI 2025. Paper. Typbegränsad avkodning i TypeScript-versioner av HumanEval och MBPP. Mäter kompileringsfel och funktionell korrekthet. Mäter avkodningsteknik, inte stackval. Status: sökträff.

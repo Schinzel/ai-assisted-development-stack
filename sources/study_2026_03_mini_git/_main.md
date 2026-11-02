@@ -10,19 +10,19 @@ Claude Code (Opus 4.6) implementing a mini-git across 13 languages.
 
 ## Results
 
-| Language        | Time (s) |
-|-----------------|----------|
-| Ruby            | 73       |
-| Python          | 75       |
-| JavaScript      | 81       |
-| Go              | 102      |
-| Rust            | 114      |
-| Java            | 115      |
-| Python/mypy     | 125      |
-| OCaml           | 128      |
-| Perl            | 130      |
-| Scheme          | 131      |
-| TypeScript      | 133      |
-| Lua             | 144      |
-| C               | 156      |
-| Haskell         | 174      |
+| Language    | Time (s) | Code (Group) |
+|-------------|----------|--------------|
+| Ruby        | 73       | Medium       |
+| Python      | 75       | Common       |
+| JavaScript  | 81       | Common       |
+| Go          | 102      | Common       |
+| Rust        | 114      | Medium       |
+| Java        | 115      | Common       |
+| Python/mypy | 125      | Common       |
+| OCaml       | 128      | Uncommon     |
+| Perl        | 130      | Uncommon     |
+| Scheme      | 131      | Uncommon     |
+| TypeScript  | 133      | Common       |
+| Lua         | 144      | Uncommon     |
+| C           | 156      | Common       |
+| Haskell     | 174      | Uncommon     |
