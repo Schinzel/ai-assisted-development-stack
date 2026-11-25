@@ -1,6 +1,14 @@
 # Source candidates: language and stack for AI-assisted development
 
-Compiled 2026-09-29, supplemented 2026-11-01. The list contains possible sources to review later. The results have not been interpreted. The starting point, mame/ai-coding-lang-bench (March 2026), is already covered in `study_2026_03` and is not included in the list.
+## Purpose
+The purpose of this file is to be the queue of sources that may become studies in this repo. It keeps the search work so it does not have to be redone, and the Gaps section records what we looked for and did not find. When a source is turned into a study, it gets its own folder under `sources/` and is removed from the list.
+
+## History
+Compiled 2026-09-29, supplemented 2026-11-01. The list contains possible sources to review later. The results have not been interpreted. Three sources have their own study folders and are therefore not included in the list:
+- mame/ai-coding-lang-bench (March 2026), the starting point: [study_2026_03_mini_git](study_2026_03_mini_git/_main.md)
+- kmizu/another-ai-coding-lang-bench: [study_2026_03_mini_git_2](study_2026_03_mini_git_2/_main.md)
+- Dan Luu's post on token efficiency and correctness: [study_2026_zstd](study_2026_zstd/_main.md)
+
 Verification status: **fetched** = the page was read, **search hit** = the URL came from search results or an abstract and the page was not read, **unverified** = the page could not be reached. **not checked** = the entry comes from a separate compilation and the page was not checked when the entry was added.
 
 ## 1. Language comparisons
@@ -89,6 +97,6 @@ Note: all sources in this group were assessed from title, abstract or search sni
 - No controlled measurements of monolith versus microservices, or of vertical slices versus layers.
 - No studies isolating build tooling complexity (Vite/webpack, monorepo).
 - No 2025–2026 study that regresses agent success against language properties (type system, verbosity, paradigm, amount of training data).
-- No blog posts beyond mame, kmizu and Dan Luu where the same app was built in several languages with measurements.
+- No blog posts beyond mame, kmizu and Dan Luu (all three have their own study folders, see the top of this file) where the same app was built in several languages with measurements.
 - Not checked: whether the mame repo has been updated after March 2026, the other forks (68 in total), the publication date of Dan Luu's post, and whether Terminal-Bench reports per-language results.
 - Per-language results from Multi-SWE-bench, SWE-bench Multilingual and AutoCodeBench with 2026 models have not been fetched.
