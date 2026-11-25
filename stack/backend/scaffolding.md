@@ -25,3 +25,5 @@ Readable in implementation but weaker as structural documentation — it lacks t
 
 ## Conclusion
 If the human's role is system designer reviewing scaffolding, Python may be the strongest choice — not for the AI's sake, but for the human's.
+
+The scaffolding-first workflow this builds on is described in [ai-assisted-development-workflow](https://github.com/Schinzel/ai-assisted-development-workflow/blob/main/dev-org.md).
