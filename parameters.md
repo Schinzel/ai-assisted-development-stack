@@ -11,14 +11,19 @@
 6. **Buildable, not navigable** — AI builds better than it navigates
 7. **Readability** — How naturally the code expresses intent
 8. **Declarative** — SQL, HTML, HTMX: describe what, not how. Declarative is about what level of abstraction the code operates at.
+9. **Build Time** — Fast build time is beneficial for LLMs. 
 
 ## Backend language parameters
 
-1. **Dynamic over static** — Dynamic languages perform consistently better (with caveats at large scale)
-2. **Small foundation with rich primitives** — The Smalltalk principle: few verbs, but the right verbs
+1. **Dynamic over static** — Dynamic languages perform consistently better (with possible caveats at large scale)
+2. **Function** — function languages do not perform well and are consistently perform the worst. 
+3. **Small foundation with rich primitives** — The Smalltalk principle: few verbs, but the right verbs
    - Counter-example: Lua — small cognitive surface and small foundation, but the primitives aren't rich. Tables can do everything but give you nothing for free.
-3. **Design readability without enforcement. Scaffolding-friendliness.**
-4. **Imperative paradigm** — When given multi-paradigm languages, AI consistently chooses imperative style with free-standing functions. No OO, minimal functional. The paradigm the AI naturally reaches for appears to be a factor in performance.
+4. **Design readability without enforcement. Scaffolding-friendliness.**
+5. **Imperative paradigm** — When given multi-paradigm languages, AI consistently chooses imperative style with free-standing functions. No OO, minimal functional. The paradigm the AI naturally reaches for appears to be a factor in performance.
+
+## Front End
+1. **Sole owner** — A sole owner of the UI performs the best. Preact and persumably React peforms better than when the UI is controlled by mutliple stack elements. For example htmx and alpine.js.
 
 ## Dismissed parameter
 
